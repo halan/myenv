@@ -41,7 +41,7 @@ namespace :custom do
   task :all => [:vimrc, :zshrc, :gitconfig]
 end
 
-
+desc 'Install dependencies, janus, oh-my-zsh, rvm and confs'
 task :install => [:'install:dependencies', :'install:janus', :'install:oh-my-zsh', :'custom:gitconfig'] do
   puts <<-DOC
     \e[0;32m
