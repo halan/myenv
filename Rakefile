@@ -31,6 +31,11 @@ namespace :custom do
   task :vimrc     do copy_conf 'vimrc',     '.vimrc.before' end
   task :zshrc     do copy_conf 'zshrc',     '.zshrc'        end
   task :gitconfig do copy_conf 'gitconfig', '.gitconfig'    end
+  task :theme do
+    copy_conf 'zsh/themes/halan.zsh-theme', '.oh-my-zsh/themes/halan.zsh-theme'
+  end
+
+
 
   task :all do
     Rake::Task['custom:vimrc'].invoke
