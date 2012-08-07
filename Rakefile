@@ -1,16 +1,19 @@
 def say phrase
-  puts "---> #{phrase}"
+  puts "\e[0;32m---> #{phrase}\e[0m"
 end
 
 namespace :install do
   task :janus do
     say 'Installing Janus'
     `curl -Lo- https://bit.ly/janus-bootstrap | bash`
+    Rake::Task['custom:vimrc'].invoke
   end 
 
   task :'oh-my-zsh' do
     say 'Installing Oh My Zsh'
     `curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh`
+    Rake::Task['custom:zshrc'].invoke
+    Rake::Task['custom:theme'].invoke
   end
 
   task :rvm do
@@ -35,21 +38,15 @@ namespace :custom do
     copy_conf 'zsh/themes/halan.zsh-theme', '.oh-my-zsh/themes/halan.zsh-theme'
   end
 
-
-
-  task :all do
-    Rake::Task['custom:vimrc'].invoke
-    Rake::Task['custom:zshrc'].invoke
-    Rake::Task['custom:gitconfig'].invoke
-  end
+  task :all => [:vimrc, :zshrc, :gitconfig]
 end
 
 
-task :install do
-  Rake::Task['install:dependencies'].invoke
-
-  Rake::Task['install:janus'].invoke
-  Rake::Task['install:oh-my-zsh'].invoke
-
-  Rake::Task['custom:all'].invoke
+task :install => [:'install:dependencies', :'install:janus', :'install:oh-my-zsh', :'custom:gitconfig'] do
+  puts <<-DOC
+    \e[0;32m
+    Restart your shell and enjoy it!
+    --------------------------------
+    \e[0m
+  DOC
 end
