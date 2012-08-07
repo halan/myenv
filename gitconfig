@@ -1,0 +1,26 @@
+[user]
+  name = halan
+  email = halan.pinheiro@gmail.com
+   
+[color]
+  diff = auto
+  grep = auto
+  interactive = auto
+  status = auto
+  branch = auto
+  status = auto
+   
+[core]
+  editor = vim
+
+[alias]
+  st = status
+  ci = commit
+  br = branch
+  df = diff
+  #lg = log -pgit ps
+  lg = log --pretty=oneline --all --graph --abbrev-commit --decorate
+  co = checkout
+  pom = push origin master
+  ps = push
+  pl = pull

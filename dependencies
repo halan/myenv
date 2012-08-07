@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Dependencies
+sudo apt-get install git-all build-essential vim libreadline6 libreadline6-dev libssl-dev zsh curl terminator
+
